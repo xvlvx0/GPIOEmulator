@@ -1,5 +1,21 @@
-from tkinter import *
-import tkinter as tk
+#####################################
+#####Raspberry PI GPIO Emulator #####
+#####################################
+import sys
+print("\n--- The Python version is %s.%s.%s ---\n\n" % sys.version_info[:3])
+
+##### Check Python Version #####
+if sys.version_info[0] == 2 and sys.version_info[1] <= 7:       # Check for Python 2.7
+    from Tkinter import *
+    import Tkinter as tk
+elif sys.version_info[1] > 2:                                   # Check for Python 3+
+    from tkinter import *
+    import tkinter as tk
+else:
+    print("ERROR - Unsupported Python version\n")
+    sys.exit()
+
+
 from PIN import PIN
 from TypeChecker import typeassert
 import threading
@@ -17,12 +33,9 @@ GPIONames=["14","15","18","23","24","25","8","7","12","16","20","21","2","3","4"
 class App(threading.Thread):
     
 
-        
     def __init__(self):
         threading.Thread.__init__(self)
         self.start()
-
-        
 
     def callback(self):
         self.root.quit()
@@ -32,8 +45,7 @@ class App(threading.Thread):
         self.root.wm_title("GPIO EMULATOR")
         self.root.protocol("WM_DELETE_WINDOW", self.callback)
 
-
-            
+     
         #5V
         pin2label = Label(text="5V", fg="red")
         pin2label.grid(row=0, column=0, padx=(10, 10))
@@ -265,7 +277,6 @@ class App(threading.Thread):
        
         self.root.mainloop()       
 
-        
 
 ##        button1.unbind("<Button-1>")
      
@@ -286,12 +297,10 @@ def toggleButton(gpioID):
     objBtn["text"] = "GPIO" + str(gpioID) + "\nIN=" + str(objPin.In)
     
     
-  
 def buttonClick(self):
 ##    print("clicked")
     gpioID = (self.widget.config('command')[-1])
     toggleButton(gpioID)
-    
     
 
 def buttonClickRelease(self):
@@ -299,11 +308,7 @@ def buttonClickRelease(self):
     gpioID = (self.widget.config('command')[-1])
     toggleButton(gpioID)
     
-
-
-
-
-    
+ 
 def drawGPIOOut(gpioID):
     global dictionaryPins
     global dictionaryPinsTkinter
@@ -311,8 +316,6 @@ def drawGPIOOut(gpioID):
     gpioID = str(gpioID)
     objPin = dictionaryPins[gpioID]
     objBtn = dictionaryPinsTkinter[gpioID]
-
-    
 
     if(objPin.SetMode == "OUT"):
         objBtn["text"] = "GPIO" + str(gpioID) + "\nOUT=" + str(objPin.Out)
@@ -323,10 +326,6 @@ def drawGPIOOut(gpioID):
             objBtn.configure(background='DarkOliveGreen3')
             objBtn.configure(activebackground='DarkOliveGreen3')
             
-            
-    
-    
-    
 
 def drawBindUpdateButtonIn(gpioID,In):
     objBtn = dictionaryPinsTkinter[gpioID]
@@ -341,7 +340,6 @@ def drawBindUpdateButtonIn(gpioID,In):
 
 class GPIO:
 
-  
     #constants
     LOW = 0 
     HIGH = 1
@@ -412,11 +410,7 @@ class GPIO:
                 
             drawBindUpdateButtonIn(str(channel),objTemp.In)
             dictionaryPins[str(channel)] =objTemp
-            
-            
-        
-        
-        
+
 
     @typeassert(int,int)
     def output(channel, outmode):
@@ -473,15 +467,5 @@ class GPIO:
             return False
 
 
-    
     def cleanup():
         pass
-       
-                
-            
-        
-        
-        
-
-        
-
