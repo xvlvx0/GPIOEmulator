@@ -1,6 +1,11 @@
 #####################################
 #####Raspberry PI GPIO Emulator #####
 #####################################
+#
+#
+#source: https://roderickvella.wordpress.com/2016/06/28/raspberry-pi-gpio-emulator/
+#
+#
 import sys
 print("\n--- The Python version is %s.%s.%s ---\n\n" % sys.version_info[:3])
 
@@ -16,8 +21,8 @@ else:
     sys.exit()
 
 
-from PIN import PIN
-from TypeChecker import typeassert
+from GPIOEmulator.PIN import PIN
+from GPIOEmulator.TypeChecker import typeassert
 import threading
 import time
 
