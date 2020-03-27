@@ -4,15 +4,12 @@
 
 # The inspect module isn't available for python 2.7
 # Therefore the if/else structure pulls the funcsigs module instead of the inspect module
-import sys
-if sys.version_info[0] == 2 and sys.version_info[1] <= 7:
+
+try:
     from funcsigs import signature
-elif sys.version_info[1] > 2:
+except:
     from inspect import signature
-else:
-    print("ERROR - Unsupported Python version\n")
-    sys.exit()
-    
+
 from functools import wraps
 
 def typeassert(*ty_args, **ty_kwargs):

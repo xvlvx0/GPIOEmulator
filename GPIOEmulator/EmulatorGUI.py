@@ -6,19 +6,14 @@
 #source: https://roderickvella.wordpress.com/2016/06/28/raspberry-pi-gpio-emulator/
 #
 #
-import sys
-print("\n--- The Python version is %s.%s.%s ---\n\n" % sys.version_info[:3])
+import sys, os
 
-##### Check Python Version #####
-if sys.version_info[0] == 2 and sys.version_info[1] <= 7:       # Check for Python 2.7
+try:
     from Tkinter import *
     import Tkinter as tk
-elif sys.version_info[1] > 2:                                   # Check for Python 3+
+except:
     from tkinter import *
     import tkinter as tk
-else:
-    print("ERROR - Unsupported Python version\n")
-    sys.exit()
 
 
 from GPIOEmulator.PIN import PIN
@@ -44,13 +39,16 @@ class App(threading.Thread):
 
     def callback(self):
         self.root.quit()
+        self.root.destroy()
+        # terminate the main thread forcefully
+        pid = os.getpid()
+        os.kill(pid,9)
 
     def run(self):
         self.root = tk.Tk()
         self.root.wm_title("GPIO EMULATOR")
         self.root.protocol("WM_DELETE_WINDOW", self.callback)
 
-     
         #5V
         pin2label = Label(text="5V", fg="red")
         pin2label.grid(row=0, column=0, padx=(10, 10))
@@ -279,8 +277,8 @@ class App(threading.Thread):
 
 
         self.root.geometry('%dx%d+%d+%d' % (1300, 100, 0, 0))
-       
-        self.root.mainloop()       
+        
+        self.root.mainloop()
 
 
 ##        button1.unbind("<Button-1>")
