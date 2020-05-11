@@ -2,13 +2,13 @@
 
 ![image](gpio_emulator.png)
 
-The easiest way to use this package is to install using pip for python 2.7
+The easiest way to use this package is to install using pip 
 
 ```bash
 $ sudo pip install GPIOEmulator
 ```
 
-using pip3 for python 3
+using pip3
 
 ```bash
 $ sudo pip3 install GPIOEmulator

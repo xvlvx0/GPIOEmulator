@@ -2,8 +2,41 @@ import setuptools
 
 from distutils.util import convert_path
 
-with open('DESCRIPTION.md', 'r') as readme:
-  long_description = readme.read()
+long_description ="""
+# GPIOEmulator
+
+The easiest way to use this package is to install using pip
+
+```bash
+$ sudo pip install GPIOEmulator
+```
+
+using pip3
+
+```bash
+$ sudo pip3 install GPIOEmulator
+```
+
+To use the emulator just type the following at the beginning of your script.
+
+```python
+from GPIOEmulator.EmulatorGUI import GPIO
+```
+
+## Works with
+
+- [python 3.6.8](https://www.python.org/downloads/release/3.6.8)
+
+## Simulation
+
+This library simulates the following functions which are used in the RPi.GPIO library.
+
+- GPIO.setmode()
+- GPIO.setwarnings()
+- GPIO.setup()
+- GPIO.input()
+- GPIO.output()
+"""
 
 with open('requirements.txt', 'r') as requirements_file:
   requirements_text = requirements_file.read()
